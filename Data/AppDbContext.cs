@@ -11,5 +11,6 @@ namespace ipos.Data
         }
 
         public DbSet<Product> Productos { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
     }
 }

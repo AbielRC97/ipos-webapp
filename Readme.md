@@ -5,7 +5,7 @@ docker build -t ipos-webapp .
 
 ## Levantar build docker
 ```bash
-docker run -d -p 5000:8080  ipos-webapp
+docker run -d -p 8080:8080  ipos-webapp
 ```
 
 ## Ejecutar Local
