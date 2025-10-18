@@ -3,6 +3,7 @@ using ipos.Data;
 using ipos.Models;
 using ipos.Repositories;
 using ipos.Services;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,11 @@ builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+// Configurar cultura global
+var culture = new CultureInfo("es-MX");
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 //Creamos datos en productos
 using (var scope = app.Services.CreateScope())

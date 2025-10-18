@@ -21,7 +21,7 @@
             <tr>
                 <td>@producto.Id</td>
                 <td>@producto.Nombre</td>
-                <td>@producto.Precio.ToString("C")</td>
+                <td>@producto.Precio.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("es-MX"))</td>
                 <td>@producto.Stock</td>
             </tr>
         }
@@ -39,6 +39,6 @@
 @if (Model.MostrarTotal)
 {
     <div class="mt-2">
-        <strong>Total del inventario:</strong> @Model.TotalInventario.ToString("C")
+        <strong>Total del inventario:</strong> @Model.TotalInventario.ToString("C",System.Globalization.CultureInfo.GetCultureInfo("es-MX"))
     </div>
 }

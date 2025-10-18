@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.log
+*.pdb
+#*.db   # opcional, si SQLite lo vas a montar como volumen
+*.md
+.git/
