@@ -21,6 +21,6 @@ COPY --from=build /app/publish ./
 # Carpeta para SQLite persistente
 VOLUME /app/Data
 
-EXPOSE 5000
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "ipos.dll"]
