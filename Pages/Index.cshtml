@@ -27,3 +27,18 @@
         }
     </tbody>
 </table>
+
+<!-- Formulario para calcular total -->
+<form method="post">
+    <input type="hidden" asp-for="MostrarTotal" value="true" />
+    <button type="submit" class="btn btn-primary mt-3">
+        Calcular total del inventario
+    </button>
+</form>
+
+@if (Model.MostrarTotal)
+{
+    <div class="mt-2">
+        <strong>Total del inventario:</strong> @Model.TotalInventario.ToString("C")
+    </div>
+}
