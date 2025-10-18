@@ -1,5 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using ipos.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// Agregar servicio de DbContext con SQLite
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 // Add services to the container.
 builder.Services.AddRazorPages();
 
