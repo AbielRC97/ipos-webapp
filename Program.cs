@@ -55,7 +55,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// ❌ Elimina esta línea si estás en Coolify (ya maneja HTTPS con Traefik)
+// ❌ Se Elimina esta línea si estás en Coolify (ya maneja HTTPS con Traefik)
 // app.UseHttpsRedirection();
 
 app.UseRouting();
