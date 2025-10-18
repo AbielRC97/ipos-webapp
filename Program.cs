@@ -7,13 +7,22 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 🔧 Leer puerto de entorno o usar 8080 como fallback
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(int.Parse(port));
+});
+
 // Agregar servicio de DbContext con SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Repositorio y servicio genérico
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-// Add services to the container.
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -23,7 +32,7 @@ var culture = new CultureInfo("es-MX");
 CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-//Creamos datos en productos
+// Crear datos en productos si no existen
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -39,23 +48,21 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
-// Configure the HTTP request pipeline.
+// Middleware y pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// ❌ Elimina esta línea si estás en Coolify (ya maneja HTTPS con Traefik)
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+app.MapRazorPages().WithStaticAssets();
 
 app.Run();
