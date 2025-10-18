@@ -1,10 +1,14 @@
+using System.ComponentModel.DataAnnotations;
 namespace ipos.Models
 {
     public class Product
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
+        [Required(ErrorMessage = "El nombre es obligatorio")]
+        public string Nombre { get; set; } = string.Empty;
+        [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor que 0")]
         public decimal Precio { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "El stock no puede ser negativo")]
         public int Stock { get; set; }
     }
 }
